@@ -1,0 +1,20 @@
+.save_btn {
+    background-color: #1BC4BF;
+    padding :5px 10px;
+    color:white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.cancel_btn {
+    background-color: #E2E6EE;
+    padding :5px 10px;
+    color:#7B828D;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.input {
+    background-color: #F2F6F9;
+    outline:none;
+    border:none;
+    border-radius: 5px;
+}
