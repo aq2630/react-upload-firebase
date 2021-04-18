@@ -36,7 +36,7 @@ export default function Home() {
             <Row className="my-3">
                 {products.length > 0 ? (products.reverse().map((product, i) => {
                     return <Col key={i} md={3}>
-                            <img className="img-fluid" src={product.image} alt={product.name}/>
+                                    <img className="img-fluid" src={product.image} alt={product.name}/> 
                             </Col>
                 })) : "No Products Available"}
             </Row>
