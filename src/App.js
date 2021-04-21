@@ -21,7 +21,6 @@ function App() {
         <Route path='/product/:id' component={ProductScreen}/>
         <Route path='/register' component={Register}/>
         <Route path='/' component={Home}/>
-      {/* <Route path='/form' component={UserForm}/> */}
       </Switch>
       <Footer/>
     </Router>
