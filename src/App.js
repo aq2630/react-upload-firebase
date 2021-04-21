@@ -5,6 +5,8 @@ import Header from  "./Components/Header"
 import Home from  "./Screens/Home"
 import UploadFile from  "./Screens/UploadFile"
 import Login from  "./Screens/Login"
+import Register from  "./Screens/Register"
+import ProductScreen from  "./Screens/ProductScreen"
 import Footer from "./Components/Footer"
 import UserForm from "./Components/userForm"
 
@@ -16,6 +18,8 @@ function App() {
       <Switch>
         <Route path='/upload' component={UploadFile}/>
         <Route path='/login' component={Login}/>
+        <Route path='/product/:id' component={ProductScreen}/>
+        <Route path='/register' component={Register}/>
         <Route path='/' component={Home}/>
       {/* <Route path='/form' component={UserForm}/> */}
       </Switch>

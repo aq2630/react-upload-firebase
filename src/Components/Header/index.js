@@ -13,7 +13,7 @@ export default function index() {
 
   const logout = () => {
     firebase.auth().signOut().then(() => {
-      alert("You hve signed out")
+      alert("You have signed out")
     }).catch((error) => {
       console.log(error)
     });
@@ -49,6 +49,7 @@ export default function index() {
         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
       </NavDropdown>
       <LinkContainer to="/login"><Nav.Link>Login</Nav.Link></LinkContainer>
+      <LinkContainer to="/register"><Nav.Link>Register</Nav.Link></LinkContainer>
       <LinkContainer to="/login" onClick={logout}><Nav.Link>Logout</Nav.Link></LinkContainer>
     </Nav>
   </Navbar>
