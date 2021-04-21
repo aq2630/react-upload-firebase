@@ -23,7 +23,7 @@ const Register = ({ history }) => {
         } else {
             firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    // Signed in 
+                    // Signed in when account created
                     console.log(userCredential.user);
                     history.push('/')
                     setError(false)
