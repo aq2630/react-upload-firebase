@@ -1,28 +1,26 @@
-import React, {useState, useEffect} from 'react'
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-import Header from  "./Components/Header"
-import Home from  "./Screens/Home"
-import UploadFile from  "./Screens/UploadFile"
-import Login from  "./Screens/Login"
-import Register from  "./Screens/Register"
-import ProductScreen from  "./Screens/ProductScreen"
-import Footer from "./Components/Footer"
-import UserForm from "./Components/userForm"
-
+import Header from './Components/Header';
+import Home from './Screens/Home';
+import UploadFile from './Screens/UploadFile';
+import Login from './Screens/Login';
+import Register from './Screens/Register';
+import ProductScreen from './Screens/ProductScreen';
+import Footer from './Components/Footer';
 
 function App() {
   return (
     <Router>
-      <Header/>
+      <Header />
       <Switch>
-        <Route path='/upload' component={UploadFile}/>
-        <Route path='/login' component={Login}/>
-        <Route path='/product/:id' component={ProductScreen}/>
-        <Route path='/register' component={Register}/>
-        <Route path='/' component={Home}/>
+        <Route path="/upload" component={UploadFile} />
+        <Route path="/login" component={Login} />
+        <Route path="/product/:id" component={ProductScreen} />
+        <Route path="/register" component={Register} />
+        <Route path="/" component={Home} />
       </Switch>
-      <Footer/>
+      <Footer />
     </Router>
   );
 }
