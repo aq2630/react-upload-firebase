@@ -1,3 +1,4 @@
+import { SignalCellularNull } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
 import {
   Container, Row, Col, Form, Button, ProgressBar, Alert,
@@ -41,16 +42,16 @@ const UploadFile = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (name !== null || image !== null) {
+    if (name === null || image === null || price === SignalCellularNull) {
       // setData({
       //   name,
       //   price,
       //   image,
       // });
+      setError(true);
+    } else {
       ref.add({ name, price, image });
       history.push('/');
-    } else {
-      setError(true);
     }
   };
 
