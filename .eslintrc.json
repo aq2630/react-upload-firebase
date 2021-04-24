@@ -21,6 +21,9 @@
     ],
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "react/prop-types": [0, { "ignore":["history","match"] }] 
+        "no-restricted-syntax": ["error", "FunctionExpression", "WithStatement", "BinaryExpression[operator='in']"],
+        "react/prop-types": [0, { "ignore":["history","match"] }],
+        "no-unused-vars": "warn",
+        "max-len": ["error", { "code": 999 }]
     }
 }

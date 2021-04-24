@@ -1,4 +1,3 @@
-import { SignalCellularNull } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
 import {
   Container, Row, Col, Form, Button, ProgressBar, Alert,
@@ -7,8 +6,10 @@ import firebase from '../config/firebase';
 
 const UploadFile = ({ history }) => {
   const [progress, setProgress] = useState(0);
+  const [progressGallery, setProgressGallaery] = useState(0);
   const [name, setName] = useState(null);
-  const [image, setImage] = useState(null);
+  const [mainDownloadUrl, setMainDownloadUrl] = useState([]);
+  const [downloadUrls, setDownloadUrls] = useState([]);
   const [price, setPrice] = useState(null);
   // const [data, setData] = useState({});
   const [error, setError] = useState(false);
@@ -26,31 +27,45 @@ const UploadFile = ({ history }) => {
     getUser();
   });
 
-  const changeHandler = async (e) => {
-    const file = e.target.files[0];
-    const storageRef = firebase.storage().ref(`uploads/${file.name}`);
-    const task = storageRef.put(file);
-    task.on('state_changed', (snapshot) => {
-      const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      setProgress(percentage);
-      storageRef.getDownloadURL().then((url) => {
-        setImage(url);
-        setError(false);
+  // const changeHandler = async (e) => {
+  //   const file = e.target.files[0];
+  //   const storageRef = firebase.storage().ref(`uploads/${file.name}`);
+  //   const task = storageRef.put(file);
+  //   task.on('state_changed', (snapshot) => {
+  //     const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //     setProgress(percentage);
+  //     storageRef.getDownloadURL().then((url) => {
+  //       setMainDownloadUrl(url);
+  //       setError(false);
+  //     });
+  //   });
+  // };
+  const changeHandlerGallery = async (e) => {
+    const { files } = e.target;
+    Array.from(files).forEach(async (file) => {
+      const storageRef = firebase.storage().ref(`uploads/${file.name}`);
+      const task = storageRef.put(file);
+      task.on('state_changed', (snapshot) => {
+        const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setProgressGallaery(percentage);
+      }, (err) => console.log(err),
+      () => {
+        storageRef.getDownloadURL().then((url) => {
+          setDownloadUrls((prevValue) => [...prevValue, url]);
+          setError(false);
+        });
       });
     });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (name === null || image === null || price === SignalCellularNull) {
-      // setData({
-      //   name,
-      //   price,
-      //   image,
-      // });
+    if (name === null || downloadUrls.length === 0 || price === null) {
       setError(true);
     } else {
-      ref.add({ name, price, image });
+      ref.add({
+        name, price, image: downloadUrls[0], galleryImages: downloadUrls,
+      });
       history.push('/');
     }
   };
@@ -72,12 +87,29 @@ const UploadFile = ({ history }) => {
                       <Form.Group>
                         <Form.Control required type="number" placeholder="Enter Product Price" value={price} onChange={(e) => setPrice(e.target.value)} />
                       </Form.Group>
+                      {/* <Form.Group>
+                        <Form.File
+                          id="custom-file"
+                          label="Select Main Image"
+                          custom
+                          onChange={changeHandler}
+                        />
+                      </Form.Group>
+                      <div>
+                        <ProgressBar className="my-3" now={progress} label={`${progress}%`} />
+                      </div> */}
                       <Form.Group>
-                        <Form.File required id="upload-file" onChange={changeHandler} />
+                        <Form.File
+                          id="custom-file"
+                          label="Select one or more Images"
+                          custom
+                          onChange={changeHandlerGallery}
+                          multiple
+                        />
                       </Form.Group>
                     </div>
                     <div>
-                      <ProgressBar className="my-3" now={progress} label={`${progress}%`} />
+                      <ProgressBar className="my-3" now={progressGallery} label={`${progressGallery}%`} />
                     </div>
                     <div>
                       <div>

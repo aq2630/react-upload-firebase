@@ -59,10 +59,13 @@
 .product_image_card {
     box-shadow: 0 3px 6px rgb(14 30 38 / 15%);
     padding:1vw;
-    display:flex;
-    flex-direction: column;
+    overflow:hidden;
+    width:100%;
+   display:block;
+   text-align: center;
+     /* flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 }
 .product_card {
     display: flex;

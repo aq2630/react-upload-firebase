@@ -1,9 +1,11 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
 import {
   Container, Row, Col, Spinner,
 } from 'react-bootstrap';
 import firebase from '../config/firebase';
 import '../App.css';
+import FlickitySlider from '../Components/FlickitySlider';
 
 const ProductScreen = ({ match }) => {
   const [product, setProduct] = useState(null);
@@ -17,7 +19,6 @@ const ProductScreen = ({ match }) => {
   useEffect(() => {
     getProduct();
   }, []);
-
   return (
     <div className="product_screen">
       {!product
@@ -33,8 +34,14 @@ const ProductScreen = ({ match }) => {
             <Row>
               <Col md={8}>
                 <div className="product_image_card">
-
-                  <img className="img-fluid" src={product.image} alt={product.name} />
+                  {product.galleryImages ? product.galleryImages.length > 1 ? (
+                    <FlickitySlider image={product.galleryImages} />
+                  ) : (
+                    <img className="img-fluid" src={product.image} alt={product.name} />
+                  )
+                    : (
+                      <img className="img-fluid" src={product.image} alt={product.name} />
+                    )}
                   <h3>{product.name}</h3>
                 </div>
                 <div className="product_image_card mt-3">
